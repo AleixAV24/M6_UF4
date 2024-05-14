@@ -55,4 +55,7 @@ Pel producte :
 Si no existeix a les BBDD farà un insert a les bases de dades i modificarà el camps create_at i updated_at a la data i hora actual
 Si existeix farà un update del name i actualiztarà updated_at a la data i hora actual.
 
+
 ![alt text](image-6.png)
+
+![alt text](image-7.jpeg)
