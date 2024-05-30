@@ -14,5 +14,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @NonNull
     Set<Product> findAll();
     Product findByName(String name);
+    Set<Product> findBySubcategoryName(String subcategoryName);
     Set<Product> findByNameAndPrice(String name, float price);
+
 }

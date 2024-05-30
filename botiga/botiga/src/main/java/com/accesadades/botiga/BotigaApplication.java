@@ -9,5 +9,4 @@ public class BotigaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BotigaApplication.class, args);
 	}
-
 }
