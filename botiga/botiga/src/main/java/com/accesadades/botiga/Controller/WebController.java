@@ -1,5 +1,6 @@
 package com.accesadades.botiga.Controller;
 
+import com.accesadades.botiga.Model.Subcategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +38,12 @@ public class WebController {
         return "search"; // Referencia a search.html en el directorio templates
     }
     @RequestMapping(value = "/createProduct")
-    public Product createProduct(Product product){
-        product = new Product("iPhone 13", "iPhone de aleix", "Apple", 799.99, 2);
-        return product;
+    public String createProduct(Product product){
+        productService.createProduct(product);
+        return "Product";
+    }
+    @RequestMapping(value = "/deleteProduct/{id}")
+    public void deleteProductById(long product_id){
+        productService.deleteProductById(product_id);
     }
 }

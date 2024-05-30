@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,10 +17,20 @@ public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subcategory_id;
+
     @Column
     private String name;
+
     @Column(name = "creation_at")
     private LocalDateTime creationDate;
+
     @Column(name = "update_at")
     private LocalDateTime updateDate;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL)
+    private List<Product> products;
 }
