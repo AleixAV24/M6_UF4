@@ -9,35 +9,35 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "products")
+@Entity // Esta clase es una entidad JPA
+@Table(name = "products") // Nombre de la tabla en la base de datos
 public class Product implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Indica que este campo es la clave primaria de la entidad
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente valores para esta columna (identidad)
     private long product_id;
 
-    @Column
+    @Column // Este campo se asignará a una columna en la tabla
     private String name;
 
-    @Column
+    @Column // Este campo se asignará a una columna en la tabla
     private String description;
 
-    @Column
+    @Column // Este campo se asignará a una columna en la tabla
     private String company;
 
-    @Column
+    @Column // Este campo se asignará a una columna en la tabla
     private float price;
 
-    @Column
+    @Column // Este campo se asignará a una columna en la tabla
     private long units;
 
-    @Column(name = "creation_at")
+    @Column(name = "creation_at") // Nombre de la columna en la tabla para esta propiedad
     private LocalDateTime creationDate;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at") // Nombre de la columna en la tabla para esta propiedad
     private LocalDateTime updateDate;
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name = "subcategory_id", nullable = false)
-    private Subcategory subcategory;
+    @ManyToOne(cascade=CascadeType.PERSIST) // Relación Many-to-One con Subcategory
+    @JoinColumn(name = "subcategory_id", nullable = false) // Columna en la tabla que representa la relación
+    private Subcategory subcategory; // Referencia a la subcategoría asociada
 }
