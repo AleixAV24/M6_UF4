@@ -23,11 +23,17 @@ public class SubcategoryImpl implements SubCategoryService{
 
     @Override
     public Subcategory createSubCategory(Subcategory subcategory) {
-        return subCategoryRepository.save(subcategory);
+        subCategoryRepository.save(subcategory);
+        return subcategory;
     }
 
     @Override
-    public void deleteSubcategory(long subcategory_id) {
+    public void deleteSubcategory(Long subcategory_id) {
         subCategoryRepository.deleteById(subcategory_id);
+    }
+
+    @Override
+    public Subcategory findById(long subcategory_id) {
+        return subCategoryRepository.findById(subcategory_id).orElse(null);
     }
 }

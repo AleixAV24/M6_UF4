@@ -1,12 +1,13 @@
 package com.accesadades.botiga.Controller;
 
+import com.accesadades.botiga.Model.Category;
 import com.accesadades.botiga.Model.Subcategory;
+import com.accesadades.botiga.Service.CategoryService;
+import com.accesadades.botiga.Service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.accesadades.botiga.Model.Product;
 import com.accesadades.botiga.Service.ProductService;
 import java.util.Set;
@@ -16,6 +17,8 @@ public class WebController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private SubCategoryService subCategoryService;
 
     @RequestMapping(value = "/")
     public String index(Model model) {
@@ -37,13 +40,24 @@ public class WebController {
         }
         return "search"; // Referencia a search.html en el directorio templates
     }
-    @RequestMapping(value = "/createProduct")
-    public String createProduct(Product product){
-        productService.createProduct(product);
+    @RequestMapping(value = "/createProduct", method = RequestMethod.GET)
+    public String showCreateProducts(Model model){
+        Set<Subcategory> subcategories = subCategoryService.findAll();
+
+        model.addAttribute("subcategories", subcategories);
+        model.addAttribute("product", new Product());
         return "Product";
     }
-    @RequestMapping(value = "/deleteProduct/{id}")
-    public void deleteProductById(long product_id){
+    @RequestMapping (value = "/guardarProducte", method = RequestMethod.POST)
+    public String guardarProduct(Model model, @ModelAttribute("product") Product product) {
+        if(product == null){
+            return "index";
+        }
+        productService.createProduct(product);
+        return "inserida";
+    }
+    @RequestMapping(value = "/eliminar", method = RequestMethod.DELETE)
+    public void deleteProduct(@RequestParam(value = "product_id", required = false) Long product_id, Model model){
         productService.deleteProductById(product_id);
     }
 }

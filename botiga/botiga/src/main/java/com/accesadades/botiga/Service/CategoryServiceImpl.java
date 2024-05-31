@@ -14,7 +14,6 @@ public class CategoryServiceImpl implements CategoryService{
     public Set<Category> findAllCategory() {
         return categoryRepository.findAll();
     }
-
     @Override
     public Category findCategorybyName(String name) {
         return categoryRepository.findByName(name);
@@ -22,11 +21,17 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public Category createCategory(Category category) {
-        return categoryRepository.save(category);
+        categoryRepository.save(category);
+        return category;
     }
 
     @Override
-    public void deleteCategoryById(long categoryId) {
+    public void deleteCategoryById(Long categoryId) {
         categoryRepository.deleteById(categoryId);
+    }
+
+    @Override
+    public Category findById(long categoryId) {
+        return categoryRepository.findById(categoryId).orElse(null);
     }
 }

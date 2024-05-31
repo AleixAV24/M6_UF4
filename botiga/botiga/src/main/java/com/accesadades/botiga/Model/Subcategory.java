@@ -16,7 +16,7 @@ import java.util.List;
 public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long subcategory_id;
+    private Long subcategory_id;
 
     @Column
     private String name;
@@ -27,10 +27,7 @@ public class Subcategory {
     @Column(name = "update_at")
     private LocalDateTime updateDate;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
-    @OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL)
-    private List<Product> products;
 }

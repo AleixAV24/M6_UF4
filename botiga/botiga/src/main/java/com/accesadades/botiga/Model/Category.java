@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long category_id;
+    private Long category_id;
 
     @Column
     private String name;
@@ -26,7 +26,8 @@ public class Category {
 
     @Column(name = "update_at")
     private LocalDateTime updateDate;
-
+/*
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Subcategory> subcategories;
+*/
 }
