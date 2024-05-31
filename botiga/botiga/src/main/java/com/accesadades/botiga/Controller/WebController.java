@@ -34,7 +34,7 @@ public class WebController {
 
     @RequestMapping(value = {"/search", "/prodname"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String searchProductByName(@RequestParam(value = "name", required = false) String name, Model model) {
-        if (name != null) {
+        if (name != null && !name.isEmpty()) {
             Product product = productService.findProductsByName(name);
             model.addAttribute("product", product);
         }
@@ -54,7 +54,7 @@ public class WebController {
             return "index";
         }
         productService.createProduct(product);
-        return "inserida";
+        return "insert";
     }
     @RequestMapping(value = "/eliminar", method = RequestMethod.DELETE)
     public void deleteProduct(@RequestParam(value = "product_id", required = false) Long product_id, Model model){
