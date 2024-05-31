@@ -8,5 +8,6 @@ public interface SubCategoryService {
     Set<Subcategory> findAll();
     Subcategory findByName(String name);
     Subcategory createSubCategory(Subcategory subcategory);
-    void deleteSubcategory(long subcategory_id);
+    void deleteSubcategory(Long subcategory_id);
+    Subcategory findById(long subcategory_id);
 }

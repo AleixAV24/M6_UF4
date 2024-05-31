@@ -12,4 +12,8 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
     @NonNull
     Set<Category> findAll();
     Category findByName(String name);
+    @SuppressWarnings({ "null", "unchecked" })
+    Category save(Category category);
+    @SuppressWarnings("null")
+    void deleteById(Long category_id);
 }

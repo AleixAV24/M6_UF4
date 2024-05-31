@@ -9,5 +9,6 @@ public interface CategoryService {
     Category findCategorybyName(String name);
     Category createCategory(Category category);
 
-    void deleteCategoryById(long categoryId);
+    void deleteCategoryById(Long categoryId);
+    Category findById(long categoryId);
 }

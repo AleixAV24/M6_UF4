@@ -10,5 +10,5 @@ public interface ProductService {
     Set<Product> findAllProducts(String subcategory);
     void increasePrice(Product product);
     Product createProduct(Product product);
-    void deleteProductById(long product_id);
+    void deleteProductById(Long product_id);
 }

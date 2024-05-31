@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Set<Product> findAllProducts(String subcategory) {
-        return null;
+        return productRepository.findBySubcategoryName(subcategory);
     }
 
     @Override
@@ -31,10 +31,11 @@ public class ProductServiceImpl implements ProductService {
     public void increasePrice(Product product) { }
     @Override
     public Product createProduct (Product product){
-        return productRepository.save(product);
+        productRepository.save(product);
+        return product;
     }
     @Override
-    public void deleteProductById (long product_id){
+    public void deleteProductById (Long product_id){
         productRepository.deleteById(product_id);
     }
 }

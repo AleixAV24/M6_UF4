@@ -16,5 +16,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Product findByName(String name);
     Set<Product> findBySubcategoryName(String subcategoryName);
     Set<Product> findByNameAndPrice(String name, float price);
+    @SuppressWarnings({ "null", "unchecked" })
+    Product save(Product product);
+    @SuppressWarnings("null")
+    void deleteById(Long product_id);
 
 }
