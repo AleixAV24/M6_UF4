@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Cerca de productes per nom</h1>
-<form action="#" th:action="@{/prodname}" th:object="${prodname}" th:method="post">
+<form th:action="@{/prodname}" th:method="post">
     <label for="name">Paràmetre:</label>
     <input type="text" id="name" name="name" required>
     <button type="submit">Cerca</button>
@@ -27,7 +27,7 @@
             <td th:text="${product.product_id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>
-            <td th:text="${product.subcategory}"></td>
+            <td th:text="${product.subcategory.name}"></td> <!-- Cambiado para mostrar el nombre de la subcategoría -->
             <td th:text="${product.units}"></td>
             <td th:text="${product.price}"></td>
             <td th:text="${product.company}"></td>

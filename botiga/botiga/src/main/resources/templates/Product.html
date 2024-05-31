@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Inserir Nou Producte</title>
@@ -15,84 +15,109 @@
         }
         .container {
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
         }
         form div {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
-        input[type="text"], input[type="number"], textarea {
+        input[type="text"], input[type="number"], textarea, select {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical;
         }
         button {
-            padding: 10px 15px;
+            padding: 12px 20px;
             color: #fff;
             background-color: #007BFF;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #0056b3;
         }
         .link {
-            margin-top: 10px;
+            margin-top: 20px;
             text-align: center;
         }
         .link a {
             text-decoration: none;
             color: #007BFF;
+            font-weight: bold;
         }
         .link a:hover {
             text-decoration: underline;
+        }
+        select {
+            appearance: none;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><path d="M6 9l6 6 6-6"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px 16px;
+        }
+        select:focus {
+            border-color: #007BFF;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Inserir Nou Producte</h1>
-    <form th:action="@{/productes/desar}" method="post">
+    <h1>Ingresar un nuevo producto</h1>
+    <!-- el th:action crida l'URL, amb el th:object rebem/accedim al objecte buit que li pasem pel mètode, y amb el th:method dictem el tipus de mapping que utilitzem, com amb el botó fem un "insert" necesitem posar-ho en post-->
+    <form action="#" th:action="@{/guardarProducte}" th:object="${product}" th:method="post">
         <div>
-            <label for="nom">Nom del Producte:</label>
-            <input type="text" id="nom" name="nom" required>
+            <label for="nom">Nombre del Producto:</label>
+            <input type="text" id="nom" name="nom" th:field="*{name}" required >
         </div>
         <div>
-            <label for="descripcio">Descripció:</label>
-            <textarea id="descripcio" name="descripcio" required></textarea>
-        </div>
-        <div>
-            <label for="unitats">Unitats:</label>
-            <input type="number" id="unitats" name="unitats" required>
-        </div>
-        <div>
-            <label for="preu">Preu:</label>
-            <input type="number" step="0.01" id="preu" name="preu" required>
+            <label for="descripcio">Descripción:</label>
+            <textarea id="descripcio" name="descripcio" th:field="*{description}" required></textarea>
         </div>
         <div>
             <label for="fabricant">Fabricant:</label>
-            <input type="text" id="fabricant" name="fabricant" required>
+            <input type="text" id="fabricant" name="fabricant" th:field="*{company}" required>
+        </div>
+        <div>
+            <label for="unitats">Unitats:</label>
+            <input type="number" id="unitats" name="unitats" th:field="*{units}" required>
+        </div>
+        <div>
+            <label for="preu">Preu:</label>
+            <input type="number" step="0.01" id="preu" name="preu" th:field="*{price}" required>
         </div>
         <div>
             <label for="subcategoria">Subcategoria:</label>
-            <input type="text" id="subcategoria" name="subcategoria" required>
+            <select id="subcategoria" name="subcategoria" th:field="*{subcategory}" required>
+                <option th:each="subcategory : ${subcategories}" th:value="${subcategory.subcategory_id}" th:text="${subcategory.name}"></option>
+            </select>
         </div>
         <div>
             <button type="submit">Desar</button>
+            <p><a class="nav-link" th:href="@{/}">Volver al inicio</a></p>
         </div>
     </form>
-    <div class="link">
-        <a th:href="@{/}">Tornar a l'índex</a>
-    </div>
 </div>
 </body>
 </html>
-
